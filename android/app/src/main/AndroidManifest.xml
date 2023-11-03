@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.rnalarm">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.rnalarm">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -7,19 +6,29 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <application
-      android:name=".MainApplication"
-      android:label="@string/app_name"
-      android:icon="@mipmap/ic_launcher"
-      android:roundIcon="@mipmap/ic_launcher_round"
-      android:allowBackup="false"
-      android:theme="@style/AppTheme">
+  <queries>
+    <!-- Support checking for http(s) links via the Linking API -->
+    <intent>
+      <action android:name="android.intent.action.VIEW" />
+      <category android:name="android.intent.category.BROWSABLE" />
+      <data android:scheme="https" />
+    </intent>
+  </queries>
+
+  <application
+  android:name=".MainApplication"
+  android:label="@string/app_name"
+  android:icon="@mipmap/ic_launcher"
+  android:roundIcon="@mipmap/ic_launcher_round"
+  android:allowBackup="false"
+  android:theme="@style/AppTheme">
+  <receiver
+        android:name="com.alarm.receivers.AlarmReceiver"
+        android:enabled="true"
+        android:exported="true"
+        />
       <receiver
-            android:name="com.alarm.receivers.AlarmReceiver"
-            android:enabled="true"
-            android:exported="true"
-            />
-      <receiver
+      android:exported="false"
           android:name="com.alarm.receivers.BootReceiver">
           <intent-filter>
               <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -32,12 +41,12 @@
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize"
         android:exported="true">
-        <intent-filter>
+        <intent-filter android:exported="false">
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
-      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-      <service android:name="com.alarm.AlarmService" />
-    </application>
+    <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>
+    <service android:name="com.alarm.AlarmService" />
+  </application>
 </manifest>

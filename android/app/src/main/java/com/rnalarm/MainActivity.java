@@ -18,7 +18,7 @@ protected void onCreate(Bundle savedInstanceState) {
    */
   @Override
   protected String getMainComponentName() {
-    return "RNAlarm";
+    return "rnalarm";
   }
 
   /**
