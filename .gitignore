@@ -44,3 +44,4 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 .expo
+yarn.lock
